@@ -41,6 +41,26 @@ class Ticket
      */
     private $halfDay = false;
 
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="day", type="date")
+     */
+    private $day;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_visitor", type="integer")
+     */
+    private $nbVisitor;
 
     public function __construct()
     {
@@ -134,5 +154,77 @@ class Ticket
     public function getBill()
     {
         return $this->bill;
+    }
+
+    /**
+     * Set day
+     *
+     * @param \DateTime $day
+     *
+     * @return Ticket
+     */
+    public function setDay($day)
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \DateTime
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     *
+     * @return Ticket
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set nbVisitor
+     *
+     * @param integer $nbVisitor
+     *
+     * @return Ticket
+     */
+    public function setNbVisitor($nbVisitor)
+    {
+        $this->nbVisitor = $nbVisitor;
+
+        return $this;
+    }
+
+    /**
+     * Get nbVisitor
+     *
+     * @return integer
+     */
+    public function getNbVisitor()
+    {
+        return $this->nbVisitor;
     }
 }

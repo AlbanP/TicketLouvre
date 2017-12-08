@@ -63,6 +63,11 @@ class Visitor
      */
     private $country;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rate")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $rate;
 
     /**
      * Get id
@@ -171,7 +176,7 @@ class Visitor
     }
 
     /**
-     * Set contry
+     * Set country
      *
      * @param string $contry
      *
@@ -185,7 +190,7 @@ class Visitor
     }
 
     /**
-     * Get contry
+     * Get country
      *
      * @return string
      */
@@ -216,5 +221,29 @@ class Visitor
     public function getTicket()
     {
         return $this->ticket;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param \AppBundle\Entity\Rate $rate
+     *
+     * @return Visitor
+     */
+    public function setRate(\AppBundle\Entity\Rate $rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return \AppBundle\Entity\Rate
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 }

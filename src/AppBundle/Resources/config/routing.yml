@@ -1,0 +1,14 @@
+home:
+    path:      /
+    defaults:
+        _controller: AppBundle:Ticket:index
+
+visitor:
+    path:      /visiteurs
+    defaults:
+        _controller: AppBundle:Ticket:visitor
+
+payment:
+    path:      /paiement
+    defaults:
+        _controller: AppBundle:Ticket:payment

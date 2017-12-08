@@ -23,7 +23,7 @@ class TicketType extends AbstractType
                     'allow_add'     => true,
                     'allow_delete'  => true
                 ))
-                ->add('buy', SubmitType::class);
+                ->add('pay', SubmitType::class);
     }
     
     /**

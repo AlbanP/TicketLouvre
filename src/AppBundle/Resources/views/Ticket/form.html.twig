@@ -2,31 +2,22 @@
   <div class="row">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-    {# Les erreurs générales du formulaire. #}
     {{ form_errors(form) }}
 
     {{ form_row(form.visitors) }}
     <a href="#" id="add_visitor" class="btn btn-default">Ajouter un visiteur</a>
 
-    {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-    {{ form_widget(form.buy, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_widget(form.pay, {'attr': {'class': 'btn btn-primary'}}) }}
 
-    {# Génération automatique des champs pas encore écrits.
-       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-       et tous les champs cachés (type « hidden »). #}
     {{ form_rest(form) }}
 
-    {# Fermeture de la balise <form> du formulaire HTML #}
     {{ form_end(form) }}
   </div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
     var $container = $('div#appbundle_ticket_visitors');
-
-    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
     var index = $container.find(':input').length;
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.

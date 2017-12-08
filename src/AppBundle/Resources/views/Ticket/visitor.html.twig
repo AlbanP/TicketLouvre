@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container-fluid">
+		<h3>Formulaire visiteur Ticket Louvre</h3>
+		<div>
+			<p>Date de visite : {{ day }} {{ halfDay }}<a href="{{ path('home') }}" class="btn btn-info">Choisir une autre date</a> </p> 
+			<p>Prix Total : </p><span class="total_price"></span>			
+		</div>
+
+		{{ include("AppBundle:Ticket:form.html.twig") }}
+
+    	<form action="{{ path('payment') }}" method="POST">
+	    	<script
+	            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+	            data-key="pk_test_8SXgivc5Eu0dJWZmEmFwGomw"
+	            data-amount="1800"
+	            data-name="Ticket Louvre"
+	            data-description="paiement"
+	            data-locale="auto"
+	            data-currency="eur">
+	    	</script>
+		</form>
+	</div>
+{% endblock %}

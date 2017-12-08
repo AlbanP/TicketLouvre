@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<h3>Ticket Louvre</h3>
+		{{ today }}
+		<form method="post">
+			<input type="hidden" name="day" value="{{ today }}">
+			<input type="submit" name="half_day_button" value="half_day" class="btn btn-primary" >
+			<input type="submit" name="day_button" value="day" class="btn btn-primary" >
+		</form>
+	</div>
+{% endblock %}
