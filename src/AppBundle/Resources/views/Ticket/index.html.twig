@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="container">
+	<div id="select_visitor"  class="container">
 		<h3>Ticket Louvre</h3>
-		{{ today }}
+		<h4>Tarif : </h4>
+		<ul>
+		  {% for rate in list_rate %}
+		    <li>{{ rate.name | capitalize }} : {{ rate.price / 100 }} € - {{ rate.description }}</li>
+		  {% endfor %}
+		</ul>
+		{{ today | date('d/m/Y') }}
 		<form method="post">
 			<input type="hidden" name="day" value="{{ today }}">
 			<input type="submit" name="half_day_button" value="half_day" class="btn btn-primary" >

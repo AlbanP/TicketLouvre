@@ -8,6 +8,7 @@
     <a href="#" id="add_visitor" class="btn btn-default">Ajouter un visiteur</a>
 
     {{ form_widget(form.pay, {'attr': {'class': 'btn btn-primary'}}) }}
+    <span>Prix Total : <span id="total_price"></span> €</span> 
 
     {{ form_rest(form) }}
 
@@ -16,66 +17,103 @@
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+
   $(document).ready(function() {
+    
+    var listRate = { {% for rate in list_rate %}
+        {{ rate.name }} : {{ rate.price }}, 
+      {% endfor %} };
+    var dateVisit = Date.parse('{{ day|date("Y/m/d") }}');
     var $container = $('div#appbundle_ticket_visitors');
     var index = $container.find(':input').length;
 
-    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-    $('#add_visitor').click(function(e) {
-      addVisitor($container);
+    $('#appbundle_ticket_visitors').on('change', 'input[type="checkbox"]', function() {
+      calculPrice($(this).attr('id'));
+      }
+    );   
+    $('#appbundle_ticket_visitors').on('change', 'select[name*="[birthday]"]', function() {
+      calculPrice($(this).attr('id'));
+      }
+    );
 
-      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+    $('#add_visitor').on('click', function(e) {
+      addVisitor($container);
+      e.preventDefault();
       return false;
     });
 
-    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
     if (index == 0) {
       addVisitor($container);
     } else {
-      // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
       $container.children('div').each(function() {
-        addDeleteLink($(this));
-      });
+      addWidget($(this));
+    });
     }
 
-    // La fonction qui ajoute un formulaire CategoryType
     function addVisitor($container) {
-      // Dans le contenu de l'attribut « data-prototype », on remplace :
-      // - le texte "__name__label__" qu'il contient par le label du champ
-      // - le texte "__name__" qu'il contient par le numéro du champ
       var template = $container.attr('data-prototype')
-        .replace(/__name__label__/g, 'Visiteur n°' + (index+1))
-        .replace(/__name__/g,        index)
-      ;
-
-      // On crée un objet jquery qui contient ce template
+        .replace(/__name__/g, index);
       var $prototype = $(template);
-
-      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-      addDeleteLink($prototype);
-
-      // On ajoute le prototype modifié à la fin de la balise <div>
+      addWidget($prototype);
       $container.append($prototype);
-
-      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
       index++;
     }
 
-    // La fonction qui ajoute un lien de suppression d'une catégorie
-    function addDeleteLink($prototype) {
-      // Création du lien
+    function addWidget($prototype) {
       var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+      var $priceIndicator = $('<span> Prix : <span class="price"></span> €</span>');
+      $prototype.children().append($deleteLink);
+      $prototype.children().append($priceIndicator);
 
-      // Ajout du lien
-      $prototype.append($deleteLink);
-
-      // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
       $deleteLink.click(function(e) {
-        $prototype.remove();
-        index--;
-        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        $prototype.remove();       
+        e.preventDefault();
+        priceTotal();
+    
         return false;
       });
     }
+
+    function calculPrice(id) {
+      var ticket = id.split('_');
+      var pathVisitor = '#appbundle_ticket_visitors_' + ticket[3];
+      var reduction = $(pathVisitor + '_reduction:checked');
+      var day = $(pathVisitor + '_birthday_day').val();
+      var month = $(pathVisitor + '_birthday_month').val();
+      var year = $(pathVisitor + '_birthday_year').val();
+      var birthday = Date.parse(year + '-' + digit2(month) + '-' + digit2(day));
+      var dateDiff = Math.abs(birthday - dateVisit)/((1000*60*60*24)*(1+365*4));
+      console.log(birthday);
+      console.log(dateVisit);
+      var pathPrice = pathVisitor + ' .price';
+      if (dateDiff < 1) {
+        $(pathPrice).text(listRate['gratuit']/100);
+      } else if (dateDiff < 3) {
+        $(pathPrice).text(listRate['enfant']/100);
+      } else if (reduction[0] != undefined) {
+        $(pathPrice).text(listRate['réduit']/100);
+      } else if (dateDiff > 15) {
+        $(pathPrice).text(listRate['senior']/100);
+      } else {
+        $(pathPrice).text(listRate['normal']/100);
+      }
+      priceTotal();
+    }
+
+    function priceTotal() {
+      var totalPrice = 0;
+      $('.price').each(function() {
+        if($(this).text()) {
+          totalPrice += parseInt($(this).text());
+        }
+      });
+      $('#total_price').text(totalPrice);
+    }
+
+    function digit2(number) {
+      return (number < 10 ? '0' : '') + number
+    }
+
+
   });
 </script>

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Visitor
  *
@@ -43,7 +44,7 @@ class Visitor
     private $lastName;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="birthday", type="date")
      */

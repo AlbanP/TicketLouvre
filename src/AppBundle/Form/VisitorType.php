@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class VisitorType extends AbstractType
 {
@@ -41,5 +42,10 @@ class VisitorType extends AbstractType
     public function getBlockPrefix()
     {
         return 'appbundle_visitor';
+    }
+
+    public function getName()
+    {
+        return 'form_visitors';
     }
 }

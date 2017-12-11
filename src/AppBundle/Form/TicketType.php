@@ -20,6 +20,7 @@ class TicketType extends AbstractType
         $builder
                 ->add('visitors', CollectionType::class, array(
                     'entry_type'    => VisitorType::class,
+                    'entry_options' => array('label' => false),
                     'allow_add'     => true,
                     'allow_delete'  => true
                 ))

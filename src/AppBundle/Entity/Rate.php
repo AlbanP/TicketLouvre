@@ -29,6 +29,13 @@ class Rate
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="price", type="integer")
@@ -122,5 +129,29 @@ class Rate
     public function getDateEnd()
     {
         return $this->dateEnd;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Rate
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
