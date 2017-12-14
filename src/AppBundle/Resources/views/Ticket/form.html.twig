@@ -15,6 +15,7 @@
     {{ form_end(form) }}
   </div>
 </div>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -23,7 +24,7 @@
     var listRate = { {% for rate in list_rate %}
         {{ rate.name }} : {{ rate.price }}, 
       {% endfor %} };
-    var dateVisit = Date.parse('{{ day|date("Y/m/d") }}');
+    var dateVisit = Date.parse('{{ dateVisit |date("Y/m/d") }}');
     var $container = $('div#appbundle_ticket_visitors');
     var index = $container.find(':input').length;
 

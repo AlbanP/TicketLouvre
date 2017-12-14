@@ -63,4 +63,3 @@ class Calendar
         return $this->nbVisitor;
     }
 }
-

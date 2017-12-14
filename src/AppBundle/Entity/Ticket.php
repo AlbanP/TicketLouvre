@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-
 /**
  * Ticket
  *
@@ -45,9 +44,9 @@ class Ticket
     /**
      * @var date
      *
-     * @ORM\Column(name="day", type="date")
+     * @ORM\Column(name="date_visit", type="date")
      */
-    private $day;
+    private $dateVisit;
 
     /**
      * @var int
@@ -77,6 +76,20 @@ class Ticket
     {
         $this->visitors[] = $visitor;
         $visitor->setTicket($this);
+
+        return $this;
+    }
+
+    /**
+     * Update visitor
+     *
+     * @param \AppBundle\Entity\Visitor $visitor
+    */
+    public function updateVisitor(Visitor $visitor)
+    {
+        $visitor->setTicket($this);
+
+        return $this;
     }
 
     /**
@@ -158,30 +171,6 @@ class Ticket
     }
 
     /**
-     * Set day
-     *
-     * @param \DateTime $day
-     *
-     * @return Ticket
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-
-        return $this;
-    }
-
-    /**
-     * Get day
-     *
-     * @return \DateTime
-     */
-    public function getDay()
-    {
-        return $this->day;
-    }
-
-    /**
      * Set price
      *
      * @param integer $price
@@ -227,5 +216,29 @@ class Ticket
     public function getNbVisitor()
     {
         return $this->nbVisitor;
+    }
+
+    /**
+     * Set dateVisit
+     *
+     * @param \DateTime $dateVisit
+     *
+     * @return Ticket
+     */
+    public function setDateVisit($dateVisit)
+    {
+        $this->dateVisit = $dateVisit;
+
+        return $this;
+    }
+
+    /**
+     * Get dateVisit
+     *
+     * @return \DateTime
+     */
+    public function getDateVisit()
+    {
+        return $this->dateVisit;
     }
 }

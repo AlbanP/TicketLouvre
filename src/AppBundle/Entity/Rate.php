@@ -43,13 +43,6 @@ class Rate
     private $price;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_end", type="datetime", nullable=true)
-     */
-    private $dateEnd;
-
-    /**
      * Get id
      *
      * @return integer
@@ -105,30 +98,6 @@ class Rate
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Set dateEnd
-     *
-     * @param \DateTime $dateEnd
-     *
-     * @return Rate
-     */
-    public function setDateEnd($dateEnd)
-    {
-        $this->dateEnd = $dateEnd;
-
-        return $this;
-    }
-
-    /**
-     * Get dateEnd
-     *
-     * @return \DateTime
-     */
-    public function getDateEnd()
-    {
-        return $this->dateEnd;
     }
 
     /**

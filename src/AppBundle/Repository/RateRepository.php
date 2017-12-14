@@ -10,4 +10,8 @@ namespace AppBundle\Repository;
  */
 class RateRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findRate()
+    {
+        return $this->createQueryBuilder('a')->getQuery()->getArrayResult();
+    }
 }

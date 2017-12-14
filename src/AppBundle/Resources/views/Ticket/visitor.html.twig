@@ -4,24 +4,11 @@
 	<div class="container-fluid">
 		<h3>Formulaire visiteur - Ticket Louvre</h3>
 		<div>
-			<p>Date de visite : {{ day }} {{ half_day }}<a href="{{ path('home') }}" class="btn btn-info">Choisir une autre date</a> </p> 			
+			<p>Date de visite : {{ dateVisit|date('d/m/Y') }} pour {% if (half_day == 1) %} la demi-journée {% else %} la journée{% endif %}<a href="{{ path('home') }}" class="btn btn-info">Choisir une autre date</a> </p> 			
 		</div>
 
 		{{ include("AppBundle:Ticket:form.html.twig") }}
-
-    	<form action="{{ path('payment') }}" method="POST">
-	    	<script
-	            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-	            data-key="pk_test_8SXgivc5Eu0dJWZmEmFwGomw"
-	            data-amount="1800"
-	            data-name="Ticket Louvre"
-	            data-description="paiement"
-	            data-locale="auto"
-	            data-currency="eur">
-	    	</script>
-		</form>
 	</div>
 
 
 {% endblock %}
-

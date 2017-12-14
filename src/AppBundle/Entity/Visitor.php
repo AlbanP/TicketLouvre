@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * Visitor
  *
@@ -16,7 +15,7 @@ class Visitor
 {
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Ticket", inversedBy="visitors")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
     */
     private $ticket;
 
@@ -65,9 +64,10 @@ class Visitor
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rate")
-     * @ORM\JoinColumn(nullable=false)
-    */
+     * @var int
+     *
+     * @ORM\Column(name="rate", type="integer")
+     */
     private $rate;
 
     /**
@@ -227,11 +227,11 @@ class Visitor
     /**
      * Set rate
      *
-     * @param \AppBundle\Entity\Rate $rate
+     * @param integer $rate
      *
      * @return Visitor
      */
-    public function setRate(\AppBundle\Entity\Rate $rate)
+    public function setRate($rate)
     {
         $this->rate = $rate;
 
@@ -241,7 +241,7 @@ class Visitor
     /**
      * Get rate
      *
-     * @return \AppBundle\Entity\Rate
+     * @return integer
      */
     public function getRate()
     {

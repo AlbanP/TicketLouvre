@@ -38,9 +38,9 @@ class Bill
     /**
      * @var string
      *
-     * @ORM\Column(name="customer", type="string", length=255)
+     * @ORM\Column(name="transaction_id", type="string", length=255)
      */
-    private $customer;
+    private $transactionId;
 
     /**
      * @var int
@@ -48,7 +48,6 @@ class Bill
      * @ORM\Column(name="price", type="integer")
      */
     private $price;
-
 
     /**
      * Get id
@@ -109,30 +108,6 @@ class Bill
     }
 
     /**
-     * Set customer
-     *
-     * @param string $customer
-     *
-     * @return Bill
-     */
-    public function setCustomer($customer)
-    {
-        $this->customer = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Get customer
-     *
-     * @return string
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
      * Set price
      *
      * @param integer $price
@@ -155,5 +130,28 @@ class Bill
     {
         return $this->price;
     }
-}
 
+    /**
+     * Set transactionId
+     *
+     * @param string $transactionId
+     *
+     * @return Bill
+     */
+    public function setTransactionId($transactionId)
+    {
+        $this->transactionId = $transactionId;
+
+        return $this;
+    }
+
+    /**
+     * Get transactionId
+     *
+     * @return string
+     */
+    public function getTransactionId()
+    {
+        return $this->transactionId;
+    }
+}

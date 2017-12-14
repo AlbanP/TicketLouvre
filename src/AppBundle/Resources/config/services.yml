@@ -1,0 +1,7 @@
+services:
+    app.payment:
+        class: AppBundle\PaymentStripe\PaymentStripe
+        arguments:
+            - %skStripe%
+            - 'eur'
+            - 'TicketLouvre'

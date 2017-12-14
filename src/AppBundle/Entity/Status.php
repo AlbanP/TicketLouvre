@@ -24,9 +24,9 @@ class Status
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $text;
+    private $name;
 
 
     /**
@@ -40,27 +40,26 @@ class Status
     }
 
     /**
-     * Set text
+     * Set name
      *
-     * @param string $text
+     * @param string $name
      *
      * @return Status
      */
-    public function setText($text)
+    public function setName($name)
     {
-        $this->text = $text;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get text
+     * Get name
      *
      * @return string
      */
-    public function getText()
+    public function getName()
     {
-        return $this->text;
+        return $this->name;
     }
 }
-
